@@ -3,6 +3,7 @@ import sys
 from PyQt5.QtWidgets import QApplication, QMainWindow, QPushButton
 from PyQt5.QtCore import QSize
 
+
 # > QApplication: the application handler (holds the Qt event loop, only one instance required)
 # > QWidget: a basic empty GUI widget
 # both from the QtWidgets module.
@@ -19,13 +20,25 @@ class MainWindow(QMainWindow):
 
         self.setWindowTitle("My app")
         button = QPushButton("Press Me!")
+        self.button_is_checked = True
 
-        self.setMinimumSize(QSize(400,150))
-        self.setMaximumSize(QSize(600,400))
+        button.setCheckable(True)
+        button.clicked.connect(self.button_was_clicked)
+        button.clicked.connect(self.button_was_toggled)
 
+        self.setMinimumSize(QSize(400, 150))
+        self.setMaximumSize(QSize(600, 400))
         # setting the window as fixed size, this will disable resizing capability
         # self.setFixedSize(QSize(400,400))
         self.setCentralWidget(button)
+
+    def button_was_clicked(self):
+        print("clicked !")
+
+    def button_was_toggled(self, checked):
+        # print("Checked?",checked)
+        self.button_is_checked = checked
+        print(self.button_is_checked)
 
 
 # You need one (and only one) QApplication instance per application.
@@ -37,7 +50,7 @@ app = QApplication(sys.argv)
 
 # Create a Qt widget, which will be our window.
 Window = MainWindow()
-Window.show()       # IMPORTANT!!!!! Windows are hidden by default.
+Window.show()  # IMPORTANT!!!!! Windows are hidden by default.
 
 # start the event loop
 app.exec()
