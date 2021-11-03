@@ -26,6 +26,7 @@ from PyQt5.QtCore import QSize
 # -- simply by connecting the signal to it. If the signal sends data,
 # then the receiving function will receive that data too.
 # Many Qt widgets also have their own built-in slots, meaning you can hook Qt widgets together directly.
+# --------------------------------------------------------------------------------------------------------
 
 
 class MainWindow(QMainWindow):
@@ -34,10 +35,9 @@ class MainWindow(QMainWindow):
 
         self.setWindowTitle("My app")
         self.button = QPushButton("Press Me!")
-        self.button_is_checked = True
+        # self.button_is_checked = True
 
-        self.button.setCheckable(True)
-        self.button.released.connect(self.button_was_released)
+        self.button.clicked.connect(self.button_was_clicked)
         # self.button.setChecked(self.button_is_checked)
         # button.clicked.connect(self.button_was_toggled)
 
@@ -47,12 +47,16 @@ class MainWindow(QMainWindow):
         # self.setFixedSize(QSize(400,400))
         self.setCentralWidget(self.button)
 
+    def button_was_clicked(self):
+        self.button.setText("You already clicked me!")
+        self.button.setEnabled(False)
+
+        # changing the window title too
+        self.setWindowTitle("My new fascinating app")
+
     def button_was_released(self):
         self.button_is_checked = self.button.isChecked()
         print(self.button_is_checked)
-
-    def button_was_clicked(self):
-        print("clicked !")
 
     def button_was_toggled(self, checked):
         # print("Checked?",checked)
