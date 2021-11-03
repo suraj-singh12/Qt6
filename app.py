@@ -28,40 +28,46 @@ from PyQt5.QtCore import QSize
 # Many Qt widgets also have their own built-in slots, meaning you can hook Qt widgets together directly.
 # --------------------------------------------------------------------------------------------------------
 
+import sys
+from random import choice
+
+window_titles = [
+    'My app',
+    'My app',
+    'Still My App',
+    'Still My App',
+    'What on earth',
+    'What on earth',
+    'This is surprising',
+    'This is surprising',
+    'Something Went Wrong'
+]
+
 
 class MainWindow(QMainWindow):
     def __init__(self):
         super().__init__()
+        self.n_times_clicked = 0
 
-        self.setWindowTitle("My app")
-        self.button = QPushButton("Press Me!")
-        # self.button_is_checked = True
+        self.setWindowTitle("My App")
+        self.button = QPushButton("Press Me !")
 
-        self.button.clicked.connect(self.button_was_clicked)
-        # self.button.setChecked(self.button_is_checked)
-        # button.clicked.connect(self.button_was_toggled)
+        self.button.clicked.connect(self.the_button_was_clicked)
+        self.windowTitleChanged.connect(self.the_window_title_changed)
 
-        self.setMinimumSize(QSize(400, 150))
-        self.setMaximumSize(QSize(600, 400))
-        # setting the window as fixed size, this will disable resizing capability
-        # self.setFixedSize(QSize(400,400))
         self.setCentralWidget(self.button)
 
-    def button_was_clicked(self):
-        self.button.setText("You already clicked me!")
-        self.button.setEnabled(False)
+    def the_button_was_clicked(self):
+        print("Clicked!")
+        new_window_title = choice(window_titles)
+        print("Setting Title: %s" % new_window_title)
+        self.setWindowTitle(new_window_title)
 
-        # changing the window title too
-        self.setWindowTitle("My new fascinating app")
+    def the_window_title_changed(self, window_title):
+        print("Window title changed: %s" % window_title)
 
-    def button_was_released(self):
-        self.button_is_checked = self.button.isChecked()
-        print(self.button_is_checked)
-
-    def button_was_toggled(self, checked):
-        # print("Checked?",checked)
-        self.button_is_checked = checked
-        print(self.button_is_checked)
+        if window_title == 'Something Went Wrong':
+            self.button.setDisabled(True)
 
 
 # You need one (and only one) QApplication instance per application.
