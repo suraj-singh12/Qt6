@@ -43,9 +43,8 @@ class MainWindow(QMainWindow):
 
         self.input = QLineEdit()        # an empty input box
 
-        # directly connect with setText() of label as soon any text is changed in input box
-        self.input.textChanged.connect(self.label.setText)
-        # so label will automatically get updated with the changing text
+        # directly connect with the_text_is_changed() as soon any text is changed in input box
+        self.input.textChanged.connect(self.the_text_is_changed)
 
         # adding a (type of) layout
         layout = QVBoxLayout()
@@ -59,6 +58,12 @@ class MainWindow(QMainWindow):
 
         # set the GUI (with layout) in the center of the main window
         self.setCentralWidget(container)
+
+    def the_text_is_changed(self, text):
+        # label will automatically get updated with the changing text
+        self.label.setText(text)
+        # print the same text to terminal
+        print(text)
 
 
 # You need one (and only one) QApplication instance per application.
