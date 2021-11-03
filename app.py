@@ -3,7 +3,7 @@ import sys
 from PyQt5.QtWidgets import QApplication, QMainWindow, QPushButton
 from PyQt5.QtCore import QSize
 
-# > QApplication: the application handler and
+# > QApplication: the application handler (holds the Qt event loop, only one instance required)
 # > QWidget: a basic empty GUI widget
 # both from the QtWidgets module.
 
