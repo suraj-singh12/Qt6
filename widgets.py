@@ -57,6 +57,7 @@ class MainWindow(QMainWindow):
 
         self.setCentralWidget(widget)
 
+
 '''
 Widget	        What it does
 QCheckbox	     A checkbox
@@ -76,8 +77,6 @@ QSlider	        A slider
 QSpinBox	    An integer spinner
 QTimeEdit	    For editing times
 '''
-
-
 
 app = QApplication(sys.argv)
 window = MainWindow()
