@@ -57,6 +57,27 @@ class MainWindow(QMainWindow):
 
         self.setCentralWidget(widget)
 
+'''
+Widget	        What it does
+QCheckbox	     A checkbox
+QComboBox	    A dropdown list box
+QDateEdit	    For editing dates and datetimes
+QDateTimeEdit	For editing dates and datetimes
+QDial	        Rotatable dial
+QDoubleSpinbox	A number spinner for floats
+QFontComboBox	A list of fonts
+QLCDNumber	    A quite ugly LCD display
+QLabel	        Just a label, not interactive
+QLineEdit	    Enter a line of text
+QProgressBar	A progress bar
+QPushButton	    A button
+QRadioButton	A toggle set, with only one active item
+QSlider	        A slider
+QSpinBox	    An integer spinner
+QTimeEdit	    For editing times
+'''
+
+
 
 app = QApplication(sys.argv)
 window = MainWindow()
