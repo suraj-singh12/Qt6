@@ -1,8 +1,4 @@
-import sys
 
-from PyQt5.QtWidgets import QApplication, QMainWindow, QPushButton, QLabel, QLineEdit, QVBoxLayout, QWidget
-
-from PyQt5.QtCore import QSize, Qt
 
 # > QApplication: the application handler (holds the Qt event loop, only one instance required)
 # > QWidget: a basic empty GUI widget
@@ -30,7 +26,9 @@ from PyQt5.QtCore import QSize, Qt
 # Events: Every interaction the user has with a Qt application is an event.
 # --------------------------------------------------------------------------------------------------------
 
-
+import sys
+from PyQt5.QtWidgets import QApplication, QMainWindow, QAction, QLabel, QMenu
+from PyQt5.QtCore import Qt, QSize
 import sys
 from random import choice
 
@@ -38,51 +36,18 @@ from random import choice
 class MainWindow(QMainWindow):
     def __init__(self):
         super().__init__()
+        self.setWindowTitle("Context Menu")
+        self.setFixedSize(QSize(350, 400))
 
-        self.setWindowTitle("Click Events")
-        self.setFixedSize(QSize(350, 240))
+    def contextMenuEvent(self, e):
+        # create a mew context menu (menu which appears on right click)
+        context = QMenu(self)
+        # add options in context menu
+        context.addAction(QAction("Option1", self))
+        context.addAction(QAction("Option2", self))
+        context.addAction(QAction("Option3", self))
 
-        self.label = QLabel("Click in this window")
-        self.setCentralWidget(self.label)
-
-    def mouseMoveEvent(self, e):
-        self.label.setText("mouseMoveEvent")
-
-    def mousePressEvent(self, e):
-        if e.button() == Qt.LeftButton:
-            self.label.setText("mousePressEvent LEFT")
-        elif e.button() == Qt.RightButton:
-            self.label.setText("mousePressEvent RIGHT")
-        elif e.button() == Qt.MiddleButton:
-            self.label.setText("mousePressEvent MIDLLE")
-
-    def mouseReleaseEvent(self, e):
-        if e.button() == Qt.LeftButton:
-            self.label.setText("mouseReleaseEvent LEFT")
-        elif e.button() == Qt.RightButton:
-            self.label.setText("mouseReleaseEvent RIGHT")
-        elif e.button() == Qt.MiddleButton:
-            self.label.setText("mouseReleaseEvent MIDLLE")
-
-    def mouseDoubleClickEvent(self, e):
-        if e.button() == Qt.LeftButton:
-            self.label.setText("mouseDoubleClickEvent LEFT")
-        elif e.button() == Qt.RightButton:
-            self.label.setText("mouseDoubleClickEvent RIGHT")
-        elif e.button() == Qt.MiddleButton:
-            self.label.setText("mouseDoubleClickEvent MIDLLE")
-
-
-'''
-Method	Returns
-.button()	Specific button that triggered this event
-.buttons()	State of all mouse buttons (OR'ed flags)
-.globalPos()	Application-global position as a QPoint
-.globalX()	Application-global horizontal X position
-.globalY()	Application-global vertical Y position
-.pos()	Widget-relative position as a QPoint integer
-.posF()	Widget-relative position as a QPointF float
-'''
+        context.exec(e.globalPos())
 
 # You need one (and only one) QApplication instance per application.
 # Pass in sys.argv to allow command line arguments for your app.
