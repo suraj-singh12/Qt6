@@ -28,6 +28,9 @@ from PyQt5.QtCore import QSize
 # then the receiving function will receive that data too.
 # Many Qt widgets also have their own built-in slots, meaning you can hook Qt widgets together directly.
 # --------------------------------------------------------------------------------------------------------
+# Events: Every interaction the user has with a Qt application is an event.
+# --------------------------------------------------------------------------------------------------------
+
 
 import sys
 from random import choice
@@ -36,34 +39,23 @@ from random import choice
 class MainWindow(QMainWindow):
     def __init__(self):
         super().__init__()
-        self.setWindowTitle("My App")
 
-        # empty label
-        self.label = QLabel()
+        self.setWindowTitle("Click Events")
+        self.setFixedSize(QSize(350,240))
+        self.label = QLabel("Click in this window")
+        self.setCentralWidget (self.label)
 
-        self.input = QLineEdit()        # an empty input box
+    def mouseMoveEvent(self,e):
+        self.label.setText("mouseMoveEvent")
 
-        # directly connect with the_text_is_changed() as soon any text is changed in input box
-        self.input.textChanged.connect(self.the_text_is_changed)
+    def mousePressEvent(self,e):
+        self.label.setText("mousePressEvent")
 
-        # adding a (type of) layout
-        layout = QVBoxLayout()
-        # adding two elements in layout
-        layout.addWidget(self.input)
-        layout.addWidget(self.label)
+    def mouseReleaseEvent(self,e):
+        self.label.setText("mouseReleaseEvent")
 
-        container = QWidget()   # the basic gui window
-        # setting the layout of this window as we defined above
-        container.setLayout(layout)
-
-        # set the GUI (with layout) in the center of the main window
-        self.setCentralWidget(container)
-
-    def the_text_is_changed(self, text):
-        # label will automatically get updated with the changing text
-        self.label.setText(text)
-        # print the same text to terminal
-        print(text)
+    def mouseDoubleClickEvent(self,e):
+        self.label.setText("mouseDoubleClickEvent")
 
 
 # You need one (and only one) QApplication instance per application.
