@@ -1,6 +1,7 @@
 import sys
 
-from PyQt5.QtWidgets import QApplication, QMainWindow, QPushButton
+from PyQt5.QtWidgets import QApplication, QMainWindow, QPushButton, QLabel, QLineEdit, QVBoxLayout, QWidget
+
 from PyQt5.QtCore import QSize
 
 
@@ -31,43 +32,33 @@ from PyQt5.QtCore import QSize
 import sys
 from random import choice
 
-window_titles = [
-    'My app',
-    'My app',
-    'Still My App',
-    'Still My App',
-    'What on earth',
-    'What on earth',
-    'This is surprising',
-    'This is surprising',
-    'Something Went Wrong'
-]
-
 
 class MainWindow(QMainWindow):
     def __init__(self):
         super().__init__()
-        self.n_times_clicked = 0
-
         self.setWindowTitle("My App")
-        self.button = QPushButton("Press Me !")
 
-        self.button.clicked.connect(self.the_button_was_clicked)
-        self.windowTitleChanged.connect(self.the_window_title_changed)
+        # empty label
+        self.label = QLabel()
 
-        self.setCentralWidget(self.button)
+        self.input = QLineEdit()        # an empty input box
 
-    def the_button_was_clicked(self):
-        print("Clicked!")
-        new_window_title = choice(window_titles)
-        print("Setting Title: %s" % new_window_title)
-        self.setWindowTitle(new_window_title)
+        # directly connect with setText() of label as soon any text is changed in input box
+        self.input.textChanged.connect(self.label.setText)
+        # so label will automatically get updated with the changing text
 
-    def the_window_title_changed(self, window_title):
-        print("Window title changed: %s" % window_title)
+        # adding a (type of) layout
+        layout = QVBoxLayout()
+        # adding two elements in layout
+        layout.addWidget(self.input)
+        layout.addWidget(self.label)
 
-        if window_title == 'Something Went Wrong':
-            self.button.setDisabled(True)
+        container = QWidget()   # the basic gui window
+        # setting the layout of this window as we defined above
+        container.setLayout(layout)
+
+        # set the GUI (with layout) in the center of the main window
+        self.setCentralWidget(container)
 
 
 # You need one (and only one) QApplication instance per application.
