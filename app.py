@@ -39,7 +39,13 @@ class MainWindow(QMainWindow):
         self.setWindowTitle("Context Menu")
         self.setFixedSize(QSize(350, 400))
 
-    def contextMenuEvent(self, e):
+        # signal based approach to create context menu
+        # set policy for custom context menu
+        self.setContextMenuPolicy(Qt.CustomContextMenu)
+        # request to add on_custom_menu as the custom menu
+        self.customContextMenuRequested.connect(self.on_context_menu)
+
+    def on_context_menu(self, pos):
         # create a mew context menu (menu which appears on right click)
         context = QMenu(self)
         # add options in context menu
@@ -47,7 +53,7 @@ class MainWindow(QMainWindow):
         context.addAction(QAction("Option2", self))
         context.addAction(QAction("Option3", self))
 
-        context.exec(e.globalPos())
+        context.exec(self.mapToGlobal(pos))
 
 # You need one (and only one) QApplication instance per application.
 # Pass in sys.argv to allow command line arguments for your app.
