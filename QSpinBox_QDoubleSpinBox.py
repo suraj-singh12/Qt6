@@ -19,6 +19,8 @@ class MainWindow(QMainWindow):
 
         widget.setPrefix("$")
         widget.setSuffix("c")
+        # when pressed up/down arrow the value will be changed by 3,
+        # but when entered manually, it can be anything but in given range
         widget.setSingleStep(3)     # or: example 0.5 for doubleSpinBox
         widget.valueChanged.connect(self.value_changed)
         widget.textChanged.connect(self.value_changed_str)
