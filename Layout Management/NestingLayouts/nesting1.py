@@ -15,6 +15,13 @@ class MainWindow(QMainWindow):
         layout2 = QHBoxLayout()
         layout3 = QVBoxLayout()
 
+        # You can set the spacing around the layout using .setContentMargins or
+        layout1.setContentsMargins(0, 0, 0, 0)
+        # set the spacing between elements using .setSpacing.
+        layout1.setSpacing(10)
+
+        layout2.setContentsMargins(15, 15, 20, 15)
+
         layout2.addWidget(Color('red'))
         layout2.addWidget(Color('yellow'))
         layout2.addWidget(Color('purple'))
