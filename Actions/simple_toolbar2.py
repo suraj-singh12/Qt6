@@ -81,11 +81,14 @@ class MainWindow(QMainWindow):
 
         # =====================================================================
         menu = self.menuBar()
-        # adding file menu
-        file_menu = menu.addMenu("File")
-        # adding actions to menu
+        # adding a menu
+        file_menu = menu.addMenu("&File")
+        # adding actions to 'File' menu
         file_menu.addAction(button_action)
-        file_menu.addAction(button_action2)
+        file_menu.addSeparator()
+
+        file_submenu = file_menu.addMenu("submenu")
+        file_submenu.addAction(button_action2)
 
     def onMyToolBarButtonClick(self, s):
         print("click", s)
