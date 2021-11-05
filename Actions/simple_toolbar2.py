@@ -79,34 +79,13 @@ class MainWindow(QMainWindow):
         one_line.setPlaceholderText("Enter your line")
         toolbar.addWidget(one_line)
 
-        # adding multiple widgets at one place using QVBoxLayout(will make toolbar bit ugly, but it's practise)
-        # try commenting then uncommenting below code
-        # -------------------------------------
-        # layout
-        vertical_layout = QVBoxLayout()
-        # single line i/p box in layout : box1
-        line1 = QLineEdit()
-        line1.setPlaceholderText("line1")
-        vertical_layout.addWidget(line1)
-        # single line i/p box in layout : box2
-        line2 = QLineEdit()
-        line2.setPlaceholderText("Line2")
-        vertical_layout.addWidget(line2)
-
-        # simple widget
-        widget = QWidget()
-        # layout applied on this widget
-        widget.setLayout(vertical_layout)
-        # this simple widget added to toolbar
-        toolbar.addWidget(widget)
-        # -------------------------------------
-
-        toolbar.addSeparator()
-
-        # default status bar
-        self.setStatusBar(QStatusBar(self))
-
-        # ---------------------------------------------------
+        # =====================================================================
+        menu = self.menuBar()
+        # adding file menu
+        file_menu = menu.addMenu("File")
+        # adding actions to menu
+        file_menu.addAction(button_action)
+        file_menu.addAction(button_action2)
 
     def onMyToolBarButtonClick(self, s):
         print("click", s)
