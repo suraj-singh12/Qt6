@@ -23,15 +23,21 @@ class MainWindow(QMainWindow):
         super(MainWindow, self).__init__()
 
         self.setWindowTitle("My App")
+        self.w = None           # signifying no external window yet
 
         self.button = QPushButton("Push for window")
         self.button.clicked.connect(self.show_new_window)
         self.setCentralWidget(self.button)
 
+    # everytime we click the button, a new window is created.
+    # but what if we don't want to create a new window?
+    # we will check if window does not exist then create
     def show_new_window(self, checked):
         # now even after control goes out of fn, the window is alive
         # because it is not in a local fn variable like before now
-        self.w = AnotherWindow()
+
+        if self.w is None:
+            self.w = AnotherWindow()
         self.w.show()
 
 
