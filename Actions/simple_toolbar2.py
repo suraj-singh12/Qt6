@@ -4,7 +4,7 @@ from PyQt5.QtWidgets import (
     QLabel, QToolBar, QAction, QStatusBar
 )
 from PyQt5.QtGui import QIcon
-from PyQt5.QtCore import Qt
+from PyQt5.QtCore import Qt, QSize
 
 
 class MainWindow(QMainWindow):
@@ -20,9 +20,12 @@ class MainWindow(QMainWindow):
         self.setCentralWidget(label)
 
         toolbar = QToolBar("My main toolbar")
+        # set the size of icons on toolbar
+        toolbar.setIconSize(QSize(16, 16))
         self.addToolBar(toolbar)
 
-        button_action = QAction("Your button", self)
+        # first param: the icon
+        button_action = QAction(QIcon("bug.png"), "Your button", self)
         button_action.setStatusTip("This is your button")
         button_action.triggered.connect(self.onMyToolBarButtonClick)
         button_action.setCheckable(True)
