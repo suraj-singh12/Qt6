@@ -18,12 +18,22 @@ class MainWindow(QMainWindow):
 
     def button_clicked(self, s):
         dlg = QMessageBox(self)
-        dlg.setWindowTitle("I have a question!")
-        dlg.setText("This is a simple dialog")
+        dlg.setWindowTitle("Question")
+        dlg.setText("Are you sure?")
+        # all the buttons present in QDialogBox are present in QMessageBox
+        dlg.setStandardButtons(QMessageBox.Yes | QMessageBox.No)
+        dlg.setIcon(QMessageBox.Question)
         button = dlg.exec()
 
         if button == QMessageBox.Ok:
             print("Ok")
+
+# Icon state	                Description
+# QMessageBox.NoIcon	        The message box does not have an icon.
+# QMessageBox.Question	        The message is asking a question.
+# QMessageBox.Information	    The message is informational only.
+# QMessageBox.Warning	        The message is warning.
+# QMessageBox.Critical	        The message indicates a critical problem.
 
 
 app = QApplication(sys.argv)
