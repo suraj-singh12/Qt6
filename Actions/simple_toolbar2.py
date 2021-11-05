@@ -3,7 +3,7 @@ from PyQt5.QtWidgets import (
     QMainWindow, QApplication,
     QLabel, QToolBar, QAction, QStatusBar, QCheckBox, QLineEdit, QVBoxLayout, QWidget
 )
-from PyQt5.QtGui import QIcon
+from PyQt5.QtGui import QIcon, QKeySequence
 from PyQt5.QtCore import Qt, QSize
 
 
@@ -12,18 +12,18 @@ class MainWindow(QMainWindow):
     def __init__(self):
         super(MainWindow, self).__init__()
         self.setWindowTitle("My Awesome App")
-        self.setMinimumSize(QSize(400, 300))
+        # self.setMinimumSize(QSize(400, 300))
 
         # set a simple label on current window
         # ---------------------------------------------------
         label = QLabel("Hello")
         label.setAlignment(Qt.AlignCenter)
 
+        # Set the central widget of the Window. Widget will expand
+        # to take up all the space in the window by default.
         self.setCentralWidget(label)
         # ---------------------------------------------------
 
-        # toolbar
-        # ---------------------------------------------------
         # create toolbar
         toolbar = QToolBar("My main toolbar")
         # set the size of icons on toolbar
@@ -39,6 +39,11 @@ class MainWindow(QMainWindow):
         button_action.setStatusTip("This is your button")
         button_action.triggered.connect(self.onMyToolBarButtonClick)
         button_action.setCheckable(True)
+        # keyboard shortcuts can be entered in 3 ways:
+        # 1. directly using key names (example): Ctrl+p
+        # 2. using Qt.namespace identifiers (eg. Qt.CTRL + Qt.Kwy_P)
+        # 3. using system agnostic identifiers (eg. QKeySequence.Print)
+        button_action.setShortcut(QKeySequence("Ctrl+p"))
         toolbar.addAction(button_action)
 
         # separator
@@ -89,6 +94,7 @@ class MainWindow(QMainWindow):
 
         file_submenu = file_menu.addMenu("submenu")
         file_submenu.addAction(button_action2)
+        # =======================================================================
 
     def onMyToolBarButtonClick(self, s):
         print("click", s)
