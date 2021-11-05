@@ -29,8 +29,10 @@ class MainWindow(QMainWindow):
         self.setCentralWidget(self.button)
 
     def show_new_window(self, checked):
-        w = AnotherWindow()
-        w.show()
+        # now even after control goes out of fn, the window is alive
+        # because it is not in a local fn variable like before now
+        self.w = AnotherWindow()
+        self.w.show()
 
 
 app = QApplication(sys.argv)
