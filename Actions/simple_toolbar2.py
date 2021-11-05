@@ -43,7 +43,7 @@ class MainWindow(QMainWindow):
         # 1. directly using key names (example): Ctrl+p
         # 2. using Qt.namespace identifiers (eg. Qt.CTRL + Qt.Kwy_P)
         # 3. using system agnostic identifiers (eg. QKeySequence.Print)
-        button_action.setShortcut(QKeySequence("Ctrl+p"))
+        button_action.setShortcut(QKeySequence("Ctrl+1"))
         toolbar.addAction(button_action)
 
         # separator
@@ -54,6 +54,7 @@ class MainWindow(QMainWindow):
         button_action2.setStatusTip("This is also your button")
         button_action2.triggered.connect(self.onMyToolBarButtonClick)
         button_action2.setCheckable(True)
+        button_action2.setShortcut(QKeySequence("Ctrl+2"))
         toolbar.addAction(button_action2)
 
         toolbar.addSeparator()
