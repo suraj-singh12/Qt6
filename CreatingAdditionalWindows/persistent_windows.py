@@ -30,12 +30,24 @@ class MainWindow(QMainWindow):
         self.w = AnotherWindow()
 
         self.button = QPushButton("Push for Window")
-        self.button.clicked.connect(self.show_new_window)
+        self.button.clicked.connect(self.toggle_window)
         self.setCentralWidget(self.button)
 
     def show_new_window(self, checked):
         # showing our external window (after clicking push button)
         self.w.show()
+
+    # Persistent windows are created only once, and they can be hidden or shown without recreating again.
+    # Once hidden the window still exists, but will not accept any type of mouse/other input
+    # However we can continue to call methods on window and update its state
+    # including changing it's appearance. Once re-shown any changes will be visible.
+
+    # creating a toggling effect (without recreation) : hide(), show()
+    def toggle_window(self, checked):
+        if self.w.isVisible():
+            self.w.hide()
+        else:
+            self.w.show()
 
 # the only difference with persistence window is, we create windows here at startup of application
 # and then we show then when required,
