@@ -41,7 +41,10 @@ class MainWindow(QMainWindow):
             self.w = AnotherWindow()
             self.w.show()
         else:
-            self.w = None
+            self.w.close()      # close the window
+            self.w = None       # Discard reference
+        # if we do not use self.w.close() then if the window has any other reference,
+        # then it will not close, so we explicitly ensure it closes
 
 
 app = QApplication(sys.argv)
