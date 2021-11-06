@@ -1,5 +1,6 @@
 import sys
 from PyQt5.QtWidgets import *
+from PyQt5.QtCore import QSize
 from random import randint
 
 
@@ -17,12 +18,30 @@ class AnotherWindow(QWidget):
         self.setLayout(layout)
 
 
+class LogWindow(QWidget):
+    def __init__(self):
+        super(LogWindow, self).__init__()
+        self.setWindowTitle("Log Window")
+        self.setMinimumSize(QSize(350,  100))
+        self.label = QLabel("All Program logs will appear here.")
+
+        layout = QVBoxLayout()
+        layout.addWidget(self.label)
+        self.setLayout(layout)
+
+
 class MainWindow(QMainWindow):
     def __init__(self):
         super(MainWindow, self).__init__()
         self.setWindowTitle("My App")
+        self.setMinimumSize(QSize(300, 200))
         self.window1 = AnotherWindow()
         self.window2 = AnotherWindow()
+
+        self.window3 = LogWindow()
+        self.window3.show()
+        self.window4 = LogWindow()
+        self.window4.show()
 
         l = QVBoxLayout()
         button1 = QPushButton("Push for window 1")
