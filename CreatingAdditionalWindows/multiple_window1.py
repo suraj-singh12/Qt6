@@ -11,9 +11,9 @@ class AnotherWindow(QWidget):
     """
     def __init__(self):
         super(AnotherWindow, self).__init__()
+        self.label = QLabel("Another Window %d" % randint(0, 100))
 
         layout = QVBoxLayout()
-        self.label = QLabel("Another Window %d" % randint(0,100))
         layout.addWidget(self.label)
         self.setLayout(layout)
 
@@ -27,6 +27,7 @@ class MainWindow(QMainWindow):
 
         self.button = QPushButton("Push for window")
         self.button.clicked.connect(self.show_new_window)
+
         self.setCentralWidget(self.button)
 
     # everytime we click the button, a new window is created.
@@ -38,7 +39,9 @@ class MainWindow(QMainWindow):
 
         if self.w is None:
             self.w = AnotherWindow()
-        self.w.show()
+            self.w.show()
+        else:
+            self.w = None
 
 
 app = QApplication(sys.argv)
