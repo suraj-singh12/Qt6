@@ -38,6 +38,7 @@ class MainWindow(QMainWindow):
         self.w.show()
 
     # Persistent windows are created only once, and they can be hidden or shown without recreating again.
+    # (see the label no on window, it does not change)
     # Once hidden the window still exists, but will not accept any type of mouse/other input
     # However we can continue to call methods on window and update its state
     # including changing it's appearance. Once re-shown any changes will be visible.
