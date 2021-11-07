@@ -6,8 +6,11 @@ import sys
 from PyQt5.QtWidgets import *
 from PyQt5 import uic
 
+
 app = QApplication(sys.argv)
 
 window = uic.loadUi("mainwindow.ui")
+# As the uic.loadUi() method turns an instance object we cannot attach custom
+# __init__() code. However, we can handle this through a custom setup function.
 window.show()
 app.exec()
