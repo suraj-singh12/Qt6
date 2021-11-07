@@ -7,9 +7,15 @@ from PyQt5.QtWidgets import *
 from PyQt5 import uic
 
 
-app = QApplication(sys.argv)
+class MainWindow(QMainWindow):
+    def __init__(self):
+        super(MainWindow, self).__init__()
+        # loading UI from the __init__() block of existing widget(here QMainWindow)
+        uic.loadUi("mainwindow.ui", self)
 
-window = uic.loadUi("mainwindow.ui")
+
+app = QApplication(sys.argv)
+window = MainWindow()
 # As the uic.loadUi() method turns an instance object we cannot attach custom
 # __init__() code. However, we can handle this through a custom setup function.
 window.show()
