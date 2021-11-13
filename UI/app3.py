@@ -35,7 +35,7 @@ if __name__ == "__main__":
     # create the application
     app = QApplication(sys.argv)
     # create and show the application's main window
-    window = Window()
+    window = MainWindow()
     window.show()
     # run the application's main loop
     sys.exit(app.exec())
