@@ -1,0 +1,7 @@
+<RCC>
+    <qresource prefix="/icons">
+        <file alias="u-turn.png">arrow-return-180-left.png</file>
+        <file alias="minus.png">minus.png</file>
+        <file alias="plus.png">plus.png</file>
+    </qresource>
+</RCC>
